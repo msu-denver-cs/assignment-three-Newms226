@@ -8,4 +8,4 @@ one:
 two:
   make: two
   model: MyString
-  vin: 1
+  vin: 2
