@@ -10,11 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_03_213635) do
+ActiveRecord::Schema.define(version: 2019_10_03_215414) do
+
+  create_table "cars", force: :cascade do |t|
+    t.integer "make_id"
+    t.string "model"
+    t.integer "vin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "part_id"
+    t.index ["make_id"], name: "index_cars_on_make_id"
+    t.index ["part_id"], name: "index_cars_on_part_id"
+  end
+
+  create_table "cars_parts", id: false, force: :cascade do |t|
+    t.integer "car_id", null: false
+    t.integer "part_id", null: false
+  end
 
   create_table "makes", force: :cascade do |t|
     t.string "name"
     t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "parts", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
