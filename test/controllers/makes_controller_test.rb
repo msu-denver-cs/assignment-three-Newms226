@@ -5,6 +5,8 @@ class MakesControllerTest < ActionDispatch::IntegrationTest
     @make = makes(:one)
   end
 
+  # Scaffold Tests
+
   test "should get index" do
     get makes_url
     assert_response :success

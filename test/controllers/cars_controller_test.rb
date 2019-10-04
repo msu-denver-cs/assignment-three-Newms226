@@ -10,6 +10,8 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
     # }
   end
 
+  # Scaffold Tests
+
   test "should get index" do
     get cars_url
     assert_response :success
@@ -27,6 +29,18 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to car_url(Car.last)
   end
+
+  # test "shouldn't create a car if the make does not exist" do
+  #   assert_no_difference('Car.count') do
+  #     post cars_url, params: { car: { make_id: "not a valid make", model: @car.model, vin: 4 } }
+  #   end
+  #
+  #   # assert_redirected_to car_url(Car.last)
+  #
+  #   # post car
+  #   # car = Car.create(model: "model", vin: 400, make: "not a valid make")
+  #   # refute car.valid?
+  # end
 
   test "should show car" do
     get car_url(@car)
