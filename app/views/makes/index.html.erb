@@ -27,3 +27,10 @@
 <br>
 
 <%= link_to 'New Make', new_make_path %>
+<br>
+<%= form_tag(search_makes_url, method: "get") do %>
+  <%= label_tag(:search, "Search by Make Name:") %>
+  <%= text_field_tag :search, params[:search],
+                     data: { autocomplete: autocomplete_make_name_makes_path } %>
+  <%= submit_tag("Search") %>
+<% end %>

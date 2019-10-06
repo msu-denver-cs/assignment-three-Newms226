@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'cars#index'
+
   resources :parts do
     get :autocomplete_part_name, on: :collection
 
@@ -7,7 +9,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :makes
+  resources :makes do
+    get :autocomplete_make_name, on: :collection
+
+    collection do
+      get 'search'
+    end
+  end
 
   resources :cars do
     get :autocomplete_car_model, on: :collection

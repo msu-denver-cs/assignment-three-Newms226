@@ -1,6 +1,8 @@
 class PartsController < ApplicationController
   before_action :set_part, only: [:show, :edit, :update, :destroy]
 
+  autocomplete :part, :name, full_search: true
+
   # GET /parts
   # GET /parts.json
   def index
@@ -59,6 +61,11 @@ class PartsController < ApplicationController
       format.html { redirect_to parts_url, notice: 'Part was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    @parts = Part.where("name like ?", "%#{params[:search]}%")
+    render :index
   end
 
   private

@@ -5,6 +5,16 @@ class MakesControllerTest < ActionDispatch::IntegrationTest
     @make = makes(:one)
   end
 
+  test "should find a make that exists" do
+    get search_makes_url, params: {search: "MyString"}
+    assert_select 'td', 'MyString'
+  end
+
+  test "shouldn't find a make that doesnt exist" do
+    get search_makes_url, params: {search: "I dont exist"}
+    assert_select 'td', false
+  end
+
   # Scaffold Tests
 
   test "should get index" do

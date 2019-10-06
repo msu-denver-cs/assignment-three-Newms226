@@ -31,6 +31,8 @@ class CarsController < ApplicationController
   # POST /cars.json
   def create
     @car = Car.new(car_params)
+    @makes = Make.all
+    @parts = Part.all
 
     respond_to do |format|
       if @car.save
@@ -69,7 +71,7 @@ class CarsController < ApplicationController
 
   # GET /cars/search
   def search
-    @cars = Car.where("vin like ?", params[:search])
+    @cars = Car.where("model like ?", "%#{params[:search]}%")
     render :index
   end
 

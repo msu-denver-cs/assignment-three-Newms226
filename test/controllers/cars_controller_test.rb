@@ -10,6 +10,18 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
     # }
   end
 
+  # Custom Tests
+
+  test "should find a car that exists" do
+    get search_cars_url, params: {search: "MyString"}
+    assert_select 'td', 'MyString'
+  end
+
+  test "shouldn't find a car that doesnt exist" do
+    get search_cars_url, params: {search: "I dont exist"}
+    assert_select 'td', false
+  end
+
   # Scaffold Tests
 
   test "should get index" do

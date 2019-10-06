@@ -5,6 +5,18 @@ class PartsControllerTest < ActionDispatch::IntegrationTest
     @part = parts(:one)
   end
 
+  test "should find a part that exists" do
+    get search_parts_url, params: {search: "MyString"}
+    assert_select 'td', 'MyString'
+  end
+
+  test "shouldn't find a part that doesnt exist" do
+    get search_parts_url, params: {search: "I dont exist"}
+    assert_select 'td', false
+  end
+
+  # Scaffold Tests
+
   test "should get index" do
     get parts_url
     assert_response :success
