@@ -1,9 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  country: MyString
+audi:
+  name: Audi
+  country: Germany
 
-two:
-  name: MyString
-  country: MyString
+bmw:
+  name: BMW
+  country: Germany
+
+ford:
+  name: Ford
+  country: USA
+
+toyota:
+  name: Toyota
+  country: Japan

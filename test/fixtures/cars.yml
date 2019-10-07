@@ -1,11 +1,39 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  make: one
-  model: MyString
+my_car:
+  make: audi
+  model: Q5
   vin: 1
+  parts:
+    - wheel
 
-two:
-  make: two
-  model: MyString
+prius:
+  make: toyota
+  model: Prius
   vin: 2
+  parts:
+    - wheel
+
+blue_truck:
+  make: ford
+  model: F150
+  vin: 3
+  parts:
+    - tire
+
+q7_rental:
+  make: audi
+  model: Q7
+  vin: 4
+  parts:
+    - tire
+
+bmw_q5:
+  make: bmw
+  model: Q5
+  vin: 5
+  parts:
+    - tire
+
+
+

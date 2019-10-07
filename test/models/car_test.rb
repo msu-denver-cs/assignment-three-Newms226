@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class CarTest < ActiveSupport::TestCase
+
+  # Validation Tests
+
   test "should create a car with a unique VIN and all fields present" do
     car = Car.create(model: "model", vin: 400, make: makes(:one))
     assert car.valid?
@@ -40,6 +43,23 @@ class CarTest < ActiveSupport::TestCase
     refute car.valid?
 
     assert_equal car.errors.messages, {:make=>["must exist"], :make_id=>["can't be blank"]}
+  end
+
+  # Search Tests
+
+  test 'Should find cars by make name' do
+    results = Car.query make: 'Audi'
+    assert results.size == 2
+
+    ids = results.map(&:id).sort
+    exp_ids = [cars(:my_car), cars(:q7_rental)].map(&:id).sort
+
+    assert_equal exp_ids, ids
+  end
+
+  test 'should find cars by part name' do
+    results = Car.query part: 'wheel'
+    asser
   end
 
 end

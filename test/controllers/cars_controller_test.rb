@@ -2,23 +2,18 @@ require 'test_helper'
 
 class CarsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @car = cars(:one)
-    # @update = {
-    #     make_id: makes(:one),
-    #     model: "my model",
-    #     vin: 200
-    # }
+    @car = cars(:my_car)
   end
 
   # Custom Tests
 
   test "should find a car that exists" do
-    get search_cars_url, params: {search: "MyString"}
-    assert_select 'td', 'MyString'
+    get search_cars_url, params: {model: "Q5"}
+    assert_select 'td', 'Q5'
   end
 
   test "shouldn't find a car that doesnt exist" do
-    get search_cars_url, params: {search: "I dont exist"}
+    get search_cars_url, params: {model: "I dont exist"}
     assert_select 'td', false
   end
 
@@ -36,7 +31,7 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create car" do
     assert_difference('Car.count') do
-      post cars_url, params: { car: { make_id: @car.make_id, model: @car.model, vin: 4 } }
+      post cars_url, params: { car: { make_id: @car.make_id, model: @car.model, vin: 10 } }
     end
 
     assert_redirected_to car_url(Car.last)

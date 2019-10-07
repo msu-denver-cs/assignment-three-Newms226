@@ -5,20 +5,9 @@ class Car < ApplicationRecord
   validates :vin, presence: true, numericality: true, uniqueness: true
   validates :model, presence: true
   validates :make_id, presence: true
-
-
-
-  def Car.search_by_make_name(name, list=Car.all)
-    make = Make.find_by_name(name)
-    if make
-      list.joins("INNER JOIN makes ON makes.id = #{make.id} AND cars.make_id = #{make.id}")
-    else
-      Car.none
-    end
-  end
+  validates :part_ids, presence: true
 
   def Car.query(params={})
-    # params = params.select { |_, value| value != ''}
     Car.select('cars.*, makes.name, parts.name')
         .joins(:make, :parts)
         .where('parts.name like ?
@@ -29,17 +18,6 @@ class Car < ApplicationRecord
                "%#{params[:make]}%",
                "%#{params[:vin]}%",
                "%#{params[:model]}%").uniq
-
-    # if params[:make] and params[:model]
-    #   by_model = Car.where('model like ?', "%#{params[:model]}%")
-    #   Car.search_by_make_name(params[:make], by_model)
-    # elsif params[:make]
-    #   Car.search_by_make_name(params[:make])
-    # elsif params[:model]
-    #   Car.where('model like ?', "%#{params[:model]}%")
-    # else
-    #   Car.all
-    # end
   end
 
   # def Car.query2(params)
