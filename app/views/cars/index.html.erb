@@ -35,7 +35,10 @@
 
 <%= form_tag(search_cars_url, method: "get") do %>
   <%= label_tag(:search, "Search by Model:") %>
-  <%= text_field_tag :search, params[:search],
-        data: { autocomplete: autocomplete_car_model_cars_path } %>    
-  <%= submit_tag("Search") %>
+  <%= text_field_tag :model, params[:model],
+                     data: { autocomplete: autocomplete_car_model_cars_path } %>
+  <%= label_tag(:search, "Search by Make:") %>
+  <%= text_field_tag :make, params[:make],
+                     data: { autocomplete: autocomplete_make_name_makes_path } %>
+  <%= submit_tag("search") %>
 <% end %>

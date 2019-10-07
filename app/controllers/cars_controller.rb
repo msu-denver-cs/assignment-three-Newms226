@@ -71,8 +71,24 @@ class CarsController < ApplicationController
 
   # GET /cars/search
   def search
-    @cars = Car.where("model like ?", "%#{params[:search]}%")
+
+    @cars = Car.query params
     render :index
+    # # TODO: Move to model? by seperation of MVC?
+    # if params.key? :make && params[:make] != ""
+    #   print "MAKE NOT EMPTY"
+    #   make_id = Make.where("name like ?", "%#{params[:make]}%" )
+    #   cars = []
+    #   make_id.each do |id|
+    #     cars.append(Cars.where("model_id = ?", id))
+    #   end
+    #   @cars = cars
+    # end
+    #
+    # @cars.append(Car.where("model like ?", "%#{params[:model]}%"))
+    #
+    # render :index
+
   end
 
   private
