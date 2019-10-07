@@ -18,18 +18,28 @@ class Car < ApplicationRecord
   end
 
   def Car.query(params={})
-    params = params.select { |_, value| value != ''}
+    # params = params.select { |_, value| value != ''}
+    Car.select('cars.*, makes.name, parts.name')
+        .joins(:make, :parts)
+        .where('parts.name like ?
+                AND makes.name like ?
+                AND cars.vin like ?
+                AND cars.model like ?',
+               "%#{params[:part]}%",
+               "%#{params[:make]}%",
+               "%#{params[:vin]}%",
+               "%#{params[:model]}%").uniq
 
-    if params[:make] and params[:model]
-      by_model = Car.where('model like ?', "%#{params[:model]}%")
-      Car.search_by_make_name(params[:make], by_model)
-    elsif params[:make]
-      Car.search_by_make_name(params[:make])
-    elsif params[:model]
-      Car.where('model like ?', "%#{params[:model]}%")
-    else
-      Car.all
-    end
+    # if params[:make] and params[:model]
+    #   by_model = Car.where('model like ?', "%#{params[:model]}%")
+    #   Car.search_by_make_name(params[:make], by_model)
+    # elsif params[:make]
+    #   Car.search_by_make_name(params[:make])
+    # elsif params[:model]
+    #   Car.where('model like ?', "%#{params[:model]}%")
+    # else
+    #   Car.all
+    # end
   end
 
   # def Car.query2(params)

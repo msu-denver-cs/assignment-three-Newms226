@@ -20,7 +20,7 @@
         <td><%= car.model %></td>
         <td><%= car.vin %></td>
             <%  l = car.parts.map {|p| p.name} %>
-        <td><%= l.join(", ") %></td>
+        <td><%= l.sort.join(", ") %></td>
         <td><%= link_to 'Show', car %></td>
         <td><%= link_to 'Edit', edit_car_path(car) %></td>
         <td><%= link_to 'Destroy', car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -40,5 +40,11 @@
   <%= label_tag(:search, "Search by Make:") %>
   <%= text_field_tag :make, params[:make],
                      data: { autocomplete: autocomplete_make_name_makes_path } %>
+  <%= label_tag(:search, "Search By Part:") %>
+  <%= text_field_tag :part, params[:part],
+                     data: { autocomplete: autocomplete_part_name_parts_path } %>
+  <%= label_tag(:search, "Search By Vin:") %>
+  <%= text_field_tag :vin, params[:vin] %>
   <%= submit_tag("search") %>
+
 <% end %>
