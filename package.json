@@ -1,5 +1,7 @@
 {
   "name": "CarShop",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "typescript": "^3.6.3"
+  }
 }

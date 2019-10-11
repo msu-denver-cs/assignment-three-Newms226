@@ -13,6 +13,7 @@ prius:
   vin: 2
   parts:
     - wheel
+    - tire
 
 blue_truck:
   make: ford

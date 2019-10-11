@@ -5,9 +5,20 @@ class Car < ApplicationRecord
   validates :vin, presence: true, numericality: true, uniqueness: true
   validates :model, presence: true
   validates :make_id, presence: true
-  validates :part_ids, presence: true
+  # validates :part_ids, presence: true
 
-  def Car.query(params={})
+  def Car.no_part_query(params={})
+    Car.select('cars.*, makes.name')
+        .joins(:make)
+        .where('makes.name like ?
+                AND cars.vin like ?
+                AND cars.model like ?',
+               "%#{params[:make]}%",
+               "%#{params[:vin]}%",
+               "%#{params[:model]}%").uniq
+  end
+
+  def Car.with_part_query(params={})
     Car.select('cars.*, makes.name, parts.name')
         .joins(:make, :parts)
         .where('parts.name like ?
@@ -18,6 +29,14 @@ class Car < ApplicationRecord
                "%#{params[:make]}%",
                "%#{params[:vin]}%",
                "%#{params[:model]}%").uniq
+  end
+
+  def Car.query(params={})
+    if params[:part] == ''
+      Car.no_part_query(params)
+    else
+      Car.with_part_query(params)
+    end
   end
 
   # def Car.query2(params)
