@@ -10,11 +10,30 @@
   </head>
 
   <body>
-    <%= yield %>
+<!--    <div class="ui menu">-->
+<!--      <div class="header item">-->
+<!--        Our Company-->
+<!--      </div>-->
+<!--      <a class="item">-->
+<!--        About Us-->
+<!--      </a>-->
+<!--      <a class="item">-->
+<!--        Jobs-->
+<!--      </a>-->
+<!--      <a class="item active">-->
+<!--        Locations-->
+<!--      </a>-->
+<!--    </div>-->
 
-    <br/><br/>
-    <%= link_to 'Cars', cars_path %>
-    <%= link_to 'Parts', parts_path %>
-    <%= link_to 'Makes', makes_path %>
+    <div class="ui container">
+      <div>
+        <%= yield %>
+      </div>
+      <div class="ui buttons">
+        <%= link_to 'Cars', cars_path, class: "ui button"  %>
+        <%= link_to 'Parts', parts_path, class: "ui button"  %>
+        <%= link_to 'Makes', makes_path, class: "ui button" %>
+      </div>
+    </div>
   </body>
 </html>

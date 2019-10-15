@@ -5,5 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#
+# Make to Country list: https://naijadriva.wordpress.com/2018/11/24/countries-of-origin-of-car-brands/
 
 
