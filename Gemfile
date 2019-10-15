@@ -66,3 +66,5 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
 gem 'semantic-ui-sass'
+
+gem 'bootstrap', '~> 4.3.1'

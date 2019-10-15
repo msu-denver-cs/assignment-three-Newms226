@@ -35,14 +35,14 @@
 
 <%= form_tag(search_cars_url, method: "get") do %>
   <%#= label_tag(:search, "Search by Model:") %>
-  <div class="ui input">
-    <%= text_field_tag :model, params[:model], placeholder: 'model',
-                       data: { autocomplete: autocomplete_car_model_cars_path } %>
+<!--  <div class="">-->
     <%= text_field_tag :make, params[:make], placeholder: 'make',
                        data: { autocomplete: autocomplete_make_name_makes_path } %>
+    <%= text_field_tag :model, params[:model], placeholder: 'model',
+                       data: { autocomplete: autocomplete_car_model_cars_path } %>
     <%= text_field_tag :part, params[:part], placeholder: 'part',
                        data: { autocomplete: autocomplete_part_name_parts_path } %>
     <%= text_field_tag :vin, params[:vin], placeholder: 'vin' %>
-  </div>
+<!--  </div>-->
   <%= submit_tag("search", class: 'positive ui button') %>
 <% end %>

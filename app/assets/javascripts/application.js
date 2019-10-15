@@ -15,4 +15,7 @@
 //= require jquery
 //= require jquery-ui
 //= require semantic-ui
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
 //= require_tree .
