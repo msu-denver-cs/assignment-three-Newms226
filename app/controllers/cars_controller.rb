@@ -6,7 +6,7 @@ class CarsController < ApplicationController
   # GET /cars
   # GET /cars.json
   def index
-    @cars = Car.all.order(:make_id, :model)
+    @cars = Car.all.order(:make_id, :model).page params[:page]
   end
 
   # GET /cars/1
