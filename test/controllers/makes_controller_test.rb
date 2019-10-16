@@ -2,12 +2,12 @@ require 'test_helper'
 
 class MakesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @make = makes(:one)
+    @make = makes(:audi)
   end
 
   test "should find a make that exists" do
-    get search_makes_url, params: {search: "MyString"}
-    assert_select 'td', 'MyString'
+    get search_makes_url, params: {search: "Audi"}
+    assert_select 'td', 'Audi'
   end
 
   test "shouldn't find a make that doesnt exist" do
@@ -29,7 +29,7 @@ class MakesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create make" do
     assert_difference('Make.count') do
-      post makes_url, params: { make: { country: @make.country, name: @make.name } }
+      post makes_url, params: { make: { country: "New Country", name: "New Make" } }
     end
 
     assert_redirected_to make_url(Make.last)

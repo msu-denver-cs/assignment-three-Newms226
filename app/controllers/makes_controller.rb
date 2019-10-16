@@ -6,7 +6,7 @@ class MakesController < ApplicationController
   # GET /makes
   # GET /makes.json
   def index
-    @makes = Make.all
+    @makes = Make.all.order(:name, :country)
   end
 
   # GET /makes/1

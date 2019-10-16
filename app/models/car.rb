@@ -32,7 +32,7 @@ class Car < ApplicationRecord
   end
 
   def Car.query(params={})
-    if params[:part] == ''
+    if not params[:part] || params[:part] == ''
       Car.no_part_query(params)
     else
       Car.with_part_query(params)

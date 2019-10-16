@@ -2,12 +2,12 @@ require 'test_helper'
 
 class PartsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @part = parts(:one)
+    @part = parts(:wheel)
   end
 
   test "should find a part that exists" do
-    get search_parts_url, params: {search: "MyString"}
-    assert_select 'td', 'MyString'
+    get search_parts_url, params: {search: "Wheel"}
+    assert_select 'td', 'Wheel'
   end
 
   test "shouldn't find a part that doesnt exist" do

@@ -36,5 +36,11 @@ bmw_q5:
   parts:
     - tire
 
+no_part:
+  make: bmw
+  model: 3 series
+  vin: 6
+  parts:
+
 
 

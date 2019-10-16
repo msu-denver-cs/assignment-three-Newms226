@@ -6,7 +6,7 @@ class PartsController < ApplicationController
   # GET /parts
   # GET /parts.json
   def index
-    @parts = Part.all
+    @parts = Part.all.order(:name)
   end
 
   # GET /parts/1
