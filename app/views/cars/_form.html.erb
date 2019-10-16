@@ -36,7 +36,7 @@
     <%= form.number_field :vin %>
   </div>
 
-  <%= form.label :part_id %>
+  <%= form.label :part_id, 'Select multiple parts with command:' %>
   <div class="field">
     <%= form.collection_select :part_ids, @parts.order(:name), :id, :name, {}, :multiple => 'true', :class => 'part_ids' %>
   </div>
