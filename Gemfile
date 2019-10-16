@@ -71,4 +71,4 @@ gem 'bootstrap', '~> 4.3.1'
 
 gem 'kaminari'
 
-gem 'bootstrap-multiselect-rails'
+gem 'bootstrap-multiselect_rails', '~> 0.9.4'

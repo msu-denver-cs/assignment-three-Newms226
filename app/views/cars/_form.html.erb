@@ -36,14 +36,19 @@
     <%= form.number_field :vin %>
   </div>
 
+  <%= form.label :part_id %>
   <div class="field">
-    <%= form.label :part_id %>
-    <ul class="list-group">
-      <%= form.collection_check_boxes :part_ids, @parts.order(:name), :id, :name do |cb| %>
-        <li class="list-group-item"><%= cb.check_box %> <span><%= Part.find_by_id(cb.value).name %></span></li>
-      <% end %>
-    </ul>
+    <%= form.collection_select :part_ids, @parts.order(:name), :id, :name, {}, :multiple => 'true', :class => 'part_ids' %>
   </div>
+
+<!--  <div class="field">-->
+    <%#= form.label :part_id %>
+<!--    <ul class="list-group">-->
+      <%#= form.collection_check_boxes :part_ids, @parts.order(:name), :id, :name do |cb| %>
+<!--        <li class="list-group-item"><%#= cb.check_box %> <span><%#= Part.find_by_id(cb.value).name %></span></li>-->
+      <%# end %>
+<!--    </ul>-->
+<!--  </div>-->
 
 <!--  <select id="example-getting-started" multiple="multiple">-->
 <!--    <option value="1">Cheese</option>-->
