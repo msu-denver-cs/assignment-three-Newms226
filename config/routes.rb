@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'about/creator'
+  get 'about/assignments'
+  get 'about/resume'
   root 'cars#index'
 
   resources :parts do

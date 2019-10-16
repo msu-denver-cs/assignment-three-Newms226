@@ -43,7 +43,7 @@ makes = lookup_lines.map do |line|
   split = line.split /( – )/
   # puts split[0]
   # puts split[2]
-  make = split[0].rstrip
+  make = split[0].strip
   country = split[2].strip
   # puts make
   # puts country
