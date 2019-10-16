@@ -64,7 +64,8 @@ class PartsController < ApplicationController
   end
 
   def search
-    @parts = Part.where("name like ?", "%#{params[:search]}%")
+    parts = Part.where("name like ?", "%#{params[:search]}%")
+    @parts = Kaminari.paginate_array(parts).page params[:page]
     render :index
   end
 

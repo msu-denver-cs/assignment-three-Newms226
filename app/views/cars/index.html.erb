@@ -49,14 +49,11 @@
     </tbody>
   </table>
 </div>
-<%# if @cars.is_a? Array %>
-  <%#= Kaminari.paginate_array @cars %>
-<%# else %>
+
 <div class="ui container">
   <%= paginate @cars %>
 </div>
 
-<%# end %>
 
 
 

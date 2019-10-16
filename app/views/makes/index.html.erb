@@ -1,12 +1,26 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Makes</h1>
+<%= link_to 'New Make', new_make_path %>
 
-<table>
+
+<div class="top-search-bar">
+  <%= form_tag(search_makes_url, method: "get") do %>
+    <div class="input-group">
+      <%= text_field_tag :search, params[:search], placeholder: 'name', class: 'form-control',
+                         data: { autocomplete: autocomplete_make_name_makes_path } %>
+      <div class="input-group-append">
+        <%= submit_tag("Search", class: 'btn btn-success') %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Country</th>
+      <th scope="col">Name</th>
+      <th scope="col">Country</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,13 +38,6 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Make', new_make_path %>
-<br>
-<%= form_tag(search_makes_url, method: "get") do %>
-  <%= label_tag(:search, "Search by Make Name:") %>
-  <%= text_field_tag :search, params[:search],
-                     data: { autocomplete: autocomplete_make_name_makes_path } %>
-  <%= submit_tag("Search") %>
-<% end %>
+<div class="ui container">
+  <%= paginate @makes %>
+</div>

@@ -64,7 +64,8 @@ class MakesController < ApplicationController
   end
 
   def search
-    @makes = Make.where("name like ?", "%#{params[:search]}%")
+    makes = Make.where("name like ?", "%#{params[:search]}%")
+    @makes = Kaminari.paginate_array(makes).page params[:page]
     render :index
   end
 
