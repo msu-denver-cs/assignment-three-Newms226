@@ -70,3 +70,5 @@ gem 'semantic-ui-sass'
 gem 'bootstrap', '~> 4.3.1'
 
 gem 'kaminari'
+
+gem 'bootstrap-multiselect-rails'
