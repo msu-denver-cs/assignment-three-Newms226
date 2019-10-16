@@ -71,8 +71,8 @@ class CarsController < ApplicationController
 
   # GET /cars/search
   def search
-
-    @cars = Car.query params
+    cars = Car.query params
+    @cars = Kaminari.paginate_array(cars).page params[:page]
     render :index
     # # TODO: Move to model? by seperation of MVC?
     # if params.key? :make && params[:make] != ""
