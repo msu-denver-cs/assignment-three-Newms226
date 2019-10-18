@@ -17,5 +17,4 @@
 //= require semantic-ui
 //= require popper
 //= require bootstrap-sprockets
-//= require bootstrap-multiselect
 //= require_tree .
