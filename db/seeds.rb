@@ -19,6 +19,8 @@ Car.all.each(&:delete)
 Make.all.each(&:delete)
 Part.all.each(&:delete)
 
+puts 'Deleted past data'
+
 
 # TODO: Update part
 
@@ -36,6 +38,7 @@ parts.each do |part_name|
   new_part.save!
 end
 
+puts 'Seeded parts'
 
 
 lookup_lines = File.readlines(Rails.root.join('lib', 'seeds', 'makes.txt'))
@@ -51,6 +54,8 @@ makes = lookup_lines.map do |line|
   new_make.save!
   make
 end
+
+puts 'Seeded Makes'
 
 unique_make_model = Set.new
 max_part_count = 5
@@ -77,3 +82,11 @@ csv.each do |row|
     unique_make_model << [ row['make'], row['model'] ]
   end
 end
+
+puts 'Seeded Cars'
+
+user = User.new
+user.email = 'test@test.com'
+user.password = 'test123'
+user.password_confirmation = 'test123'
+user.save!
