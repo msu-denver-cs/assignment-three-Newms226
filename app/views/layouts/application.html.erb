@@ -10,7 +10,14 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-sm sticky-top navbar-light bg-light">
+  <% if flash[:notice] %>
+    <p class="alert"><%= flash[:notice] %></p>
+  <% end %>
+  <% if flash[:alert] %>
+    <p class="alert"><%= flash[:alert] %></p>
+  <% end %>
+
+  <nav class="navbar navbar-expand-sm sticky-top navbar-light bg-light">
       <a class="navbar-brand" href="<%= root_path %>">Car Depot</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -33,6 +40,9 @@
         </form>
         <form class="form-inline my-2 my-lg-0">
           <button type="button" class="btn btn-outline-primary"><a href="<%= about_assignments_path %>">Assignments</a></button>
+        </form>
+        <form class="form-inline my-2 my-lg-0">
+          <button type="button" class="btn btn-outline-primary"><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></button>
         </form>
       </div>
 

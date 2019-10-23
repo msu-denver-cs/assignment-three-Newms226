@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
+  root 'cars#index'
+
+  devise_for :users
+
   get 'about/creator'
   get 'about/assignments'
   get 'about/resume'
-  root 'cars#index'
+
 
   resources :parts do
     get :autocomplete_part_name, on: :collection
