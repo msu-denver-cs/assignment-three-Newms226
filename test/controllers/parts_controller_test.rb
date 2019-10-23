@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class PartsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @part = parts(:wheel)
+    sign_in users(:one)
   end
 
   test "should find a part that exists" do

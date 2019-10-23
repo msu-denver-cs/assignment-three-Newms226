@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class MakesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @make = makes(:audi)
+    sign_in users(:one)
   end
 
   test "should find a make that exists" do

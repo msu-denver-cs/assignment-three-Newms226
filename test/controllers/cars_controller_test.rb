@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class CarsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @car = cars(:my_car)
+    sign_in users(:one)
   end
 
   # Custom Tests
