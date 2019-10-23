@@ -71,11 +71,11 @@
 <!--    </div>-->
 
     <div class="ui container center">
-      <% if flash[:notice] %>
-        <p class="alert alert-success" role="alert"><%= flash[:notice] %></p>
+      <% if notice %>
+        <p class="alert alert-success" role="alert"><%= notice %></p>
       <% end %>
-      <% if flash[:alert] %>
-        <p class="alert alert-danger" role="alert"><%= flash[:alert] %></p>
+      <% if alert %>
+        <p class="alert alert-danger" role="alert"><%= alert %></p>
       <% end %>
       <div>
         <%= yield %>
