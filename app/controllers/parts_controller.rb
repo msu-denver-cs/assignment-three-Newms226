@@ -1,5 +1,7 @@
 class PartsController < ApplicationController
   before_action :set_part, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
+
 
   autocomplete :part, :name, full_search: true
 

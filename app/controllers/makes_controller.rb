@@ -1,5 +1,7 @@
 class MakesController < ApplicationController
   before_action :set_make, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
+
 
   autocomplete :make, :name, full_search: true
 
