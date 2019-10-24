@@ -11,8 +11,6 @@ class PartsTest < ApplicationSystemTestCase
   test "visiting the index" do
     visit parts_url
     assert_selector "h1", text: "Parts"
-
-    assert_selector 'li.active', text: "Parts"
   end
 
   test "creating a Part" do

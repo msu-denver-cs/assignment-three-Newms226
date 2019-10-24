@@ -11,8 +11,6 @@ class MakesTest < ApplicationSystemTestCase
   test "visiting the index" do
     visit makes_url
     assert_selector "h1", text: "Makes"
-
-    assert_selector 'li.active', text: "Makes"
   end
 
   test "creating a Make" do

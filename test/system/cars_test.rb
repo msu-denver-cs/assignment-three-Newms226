@@ -12,8 +12,6 @@ class CarsTest < ApplicationSystemTestCase
   test "visiting the index" do
     visit cars_url
     assert_selector "h1", text: "Cars"
-
-    assert_selector 'li.active', text: "Cars"
   end
 
   test "creating a Car" do
