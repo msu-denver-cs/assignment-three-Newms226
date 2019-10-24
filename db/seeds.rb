@@ -18,6 +18,7 @@ require 'set'
 Car.all.each(&:delete)
 Make.all.each(&:delete)
 Part.all.each(&:delete)
+User.all.each(&:delete)
 
 puts 'Deleted past data'
 
@@ -38,7 +39,7 @@ parts.each do |part_name|
   new_part.save!
 end
 
-puts 'Seeded parts'
+puts 'Seeded Parts'
 
 
 lookup_lines = File.readlines(Rails.root.join('lib', 'seeds', 'makes.txt'))
@@ -58,7 +59,7 @@ end
 puts 'Seeded Makes'
 
 unique_make_model = Set.new
-max_part_count = 5
+max_part_count = 10
 part_count = parts.count
 parts = parts.to_a
 cur_vin = 0
