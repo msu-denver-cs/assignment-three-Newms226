@@ -4,7 +4,7 @@ module ApplicationHelper
   def nav_link_class(test_path)
 
     return 'nav-item active' if url_for(request.path) == url_for(test_path)
-
+    # implicit else:
     'nav-item'
   end
 

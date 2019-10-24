@@ -1,13 +1,18 @@
 require "application_system_test_case"
 
 class MakesTest < ApplicationSystemTestCase
+  include Warden::Test::Helpers
+
   setup do
-    @make = makes(:one)
+    @make = makes(:audi)
+    login_as(users(:one), :scope => :user)
   end
 
   test "visiting the index" do
     visit makes_url
     assert_selector "h1", text: "Makes"
+
+    assert_selector 'li.active', text: "Makes"
   end
 
   test "creating a Make" do
@@ -15,7 +20,7 @@ class MakesTest < ApplicationSystemTestCase
     click_on "New Make"
 
     fill_in "Country", with: @make.country
-    fill_in "Name", with: @make.name
+    fill_in "Name", with: "new make"
     click_on "Create Make"
 
     assert_text "Make was successfully created"

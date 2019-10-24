@@ -1,13 +1,18 @@
 require "application_system_test_case"
 
 class PartsTest < ApplicationSystemTestCase
+  include Warden::Test::Helpers
+
   setup do
-    @part = parts(:one)
+    @part = parts(:wheel)
+    login_as(users(:one), :scope => :user)
   end
 
   test "visiting the index" do
     visit parts_url
     assert_selector "h1", text: "Parts"
+
+    assert_selector 'li.active', text: "Parts"
   end
 
   test "creating a Part" do

@@ -1,22 +1,28 @@
 require "application_system_test_case"
 
 class CarsTest < ApplicationSystemTestCase
+  include Warden::Test::Helpers
+
   setup do
-    @car = cars(:one)
+    @car = cars(:my_car)
+    user = users(:one)
+    login_as(user, :scope => :user)
   end
 
   test "visiting the index" do
     visit cars_url
     assert_selector "h1", text: "Cars"
+
+    assert_selector 'li.active', text: "Cars"
   end
 
   test "creating a Car" do
     visit cars_url
     click_on "New Car"
 
-    fill_in "Make", with: @car.make_id
     fill_in "Model", with: @car.model
-    fill_in "Vin", with: @car.vin
+    fill_in "Vin", with: 1000
+    select 'Audi', from: 'Make'
     click_on "Create Car"
 
     assert_text "Car was successfully created"
@@ -27,7 +33,7 @@ class CarsTest < ApplicationSystemTestCase
     visit cars_url
     click_on "Edit", match: :first
 
-    fill_in "Make", with: @car.make_id
+    select 'Audi', from: 'Make'
     fill_in "Model", with: @car.model
     fill_in "Vin", with: @car.vin
     click_on "Update Car"
