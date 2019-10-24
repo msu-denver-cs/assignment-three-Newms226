@@ -7,7 +7,17 @@ class CarsController < ApplicationController
   # GET /cars
   # GET /cars.json
   def index
-    @cars = Car.all.order(:make_id, :model).page params[:page]
+    if params[:order] == 'vin' || params[:order] == 'model'
+      @cars = Car.all.order(params[:order], :model).page params[:page]
+    else
+      @cars = Car.select('cars.*, makes.name').joins(:make).order('makes.name').page params[:page]
+    end
+    # @cars = Car.select('cars.*, ')
+  end
+
+  def parse_order_param
+    return params[:order] if params[:order] == 'vin' || params[:order] == 'model'
+
   end
 
   # GET /cars/1

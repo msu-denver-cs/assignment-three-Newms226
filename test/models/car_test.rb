@@ -103,4 +103,10 @@ class CarTest < ActiveSupport::TestCase
     assert_equal results, [cars(:no_part)]
   end
 
+  # Ordering tests
+
+  test 'should order cars by make name, not id' do
+    results = Car.all.order
+  end
+
 end

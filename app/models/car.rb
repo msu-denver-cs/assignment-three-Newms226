@@ -28,7 +28,8 @@ class Car < ApplicationRecord
                "%#{params[:part]}%",
                "%#{params[:make]}%",
                "%#{params[:vin]}%",
-               "%#{params[:model]}%").uniq
+               "%#{params[:model]}%")
+        .order('makes.name').uniq
   end
 
   def Car.query(params={})
