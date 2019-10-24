@@ -32,7 +32,10 @@
         <th scope="col"><%= link_to 'Model', cars_url(order: 'model')%></th>
         <th scope="col"><%= link_to 'VIN', cars_url(order: 'vin')%></th>
         <th scope="col">Part</th>
-        <th colspan="3"></th>
+        <th colspan="2"></th>
+        <% if user_signed_in? %>
+          <th colspan="2"></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -44,9 +47,11 @@
           <td><%= car.vin %></td>
               <%  l = car.parts.map {|p| p.name} %>
           <td><%= l.sort.join(", ") %></td>
-          <td><%= link_to 'Show', car %></td>
-          <td><%= link_to 'Edit', edit_car_path(car) %></td>
-          <td><%= link_to 'Destroy', car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'View', car_path(car) %></td>
+          <% if user_signed_in? %>
+            <td><%= link_to 'Edit', edit_car_path(car) %></td>
+            <td><%= link_to 'Destroy', car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

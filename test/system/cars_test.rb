@@ -9,6 +9,9 @@ class CarsTest < ApplicationSystemTestCase
     login_as(user, :scope => :user)
   end
 
+
+  # Scaffold Tests
+
   test "visiting the index" do
     visit cars_url
     assert_selector "h1", text: "Cars"

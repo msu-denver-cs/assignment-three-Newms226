@@ -8,6 +8,8 @@ class PartsTest < ApplicationSystemTestCase
     login_as(users(:one), :scope => :user)
   end
 
+  # Scaffold Tests
+
   test "visiting the index" do
     visit parts_url
     assert_selector "h1", text: "Parts"
