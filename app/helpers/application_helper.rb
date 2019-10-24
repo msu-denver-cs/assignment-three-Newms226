@@ -9,4 +9,12 @@ module ApplicationHelper
     end
   end
 
+  def right_nav_class(test_path)
+    if url_for(request.path) == url_for(test_path)
+      'btn btn-primary'
+    else
+      'btn btn-outline-primary'
+    end
+  end
+
 end
