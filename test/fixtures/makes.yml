@@ -15,3 +15,7 @@ ford:
 toyota:
   name: Toyota
   country: Japan
+
+ram:
+  name: Ram
+  country: USA
