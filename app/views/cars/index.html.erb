@@ -45,7 +45,7 @@
           <td><%= car.make.name %></td>
           <td><%= car.model %></td>
           <td><%= car.vin %></td>
-              <%  l = car.parts.map {|p| p.name} %>
+              <%  l = car.parts.map(&:name) %>
           <td><%= l.sort.join(", ") %></td>
           <td><%= link_to 'View', car_path(car) %></td>
           <% if user_signed_in? %>
