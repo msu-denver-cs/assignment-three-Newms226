@@ -73,4 +73,6 @@ gem 'kaminari'
 
 gem 'devise'
 
+gem 'pry', '~> 0.12.2'
+
 # gem 'bootstrap-multiselect_rails', '~> 0.9.4'

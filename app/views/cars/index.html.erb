@@ -29,7 +29,8 @@
 <!--        <th scope="col"><%#= link_to 'Model', controller: controller_name, action: action_name, order: 'model' %></th>-->
 <!--        <th scope="col"><%#= link_to 'Model', url_for(params.merge!(order: 'model').permit(:order)) %></th>-->
 <!--        <th scope="col"><%#= link_to 'Model', request.url + '&order=model'%></th>-->
-        <th scope="col"><%= link_to 'Model', cars_url(order: 'model')%></th>
+<!--        <th scope="col"><%#= link_to 'Model', cars_url(order: 'model')%></th>-->
+        <th scope="col"><%= link_to 'Model', search_cars_url(model: params[:model], order: 'model')%></th>
         <th scope="col"><%= link_to 'VIN', cars_url(order: 'vin')%></th>
         <th scope="col">Part</th>
         <th colspan="2"></th>

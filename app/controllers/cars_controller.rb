@@ -1,3 +1,5 @@
+require 'pry'
+
 class CarsController < ApplicationController
   before_action :set_car, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
@@ -7,17 +9,13 @@ class CarsController < ApplicationController
   # GET /cars
   # GET /cars.json
   def index
-    if params[:order] == 'vin' || params[:order] == 'model'
-      @cars = Car.all.order(params[:order], :model).page params[:page]
-    else
-      @cars = Car.select('cars.*, makes.name').joins(:make).order('makes.name').page params[:page]
-    end
-    # @cars = Car.select('cars.*, ')
-  end
-
-  def parse_order_param
-    return params[:order] if params[:order] == 'vin' || params[:order] == 'model'
-
+    @cars = Car.index params
+    # if params[:order] == 'vin' || params[:order] == 'model'
+    #   @cars = Car.all.order(params[:order], :model).page params[:page]
+    # else
+    #   @cars = Car.select('cars.*, makes.name').joins(:make).order('makes.name').page params[:page]
+    # end
+    # # @cars = Car.select('cars.*, ')
   end
 
   # GET /cars/1
@@ -84,8 +82,9 @@ class CarsController < ApplicationController
 
   # GET /cars/search
   def search
-    cars = Car.query params
-    @cars = Kaminari.paginate_array(cars).page params[:page]
+    # binding.pry/
+    @cars = Car.query params
+    # @cars = Kaminari.paginate_array(cars).page params[:page]
     render :index
     # # TODO: Move to model? by seperation of MVC?
     # if params.key? :make && params[:make] != ""
@@ -112,6 +111,6 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:make_id, :model, :vin, :part_ids => [])
+      params.require(:car).permit(:make_id, :model, :vin, :order, :part_ids => [])
     end
 end

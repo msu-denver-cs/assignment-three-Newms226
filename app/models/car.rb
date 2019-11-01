@@ -1,3 +1,5 @@
+
+
 class Car < ApplicationRecord
   belongs_to :make
   has_and_belongs_to_many :parts
@@ -7,38 +9,63 @@ class Car < ApplicationRecord
   validates :make_id, presence: true
   # validates :part_ids, presence: true
 
-  def Car.no_part_query(params={})
-    Car.select('cars.*, makes.name')
-        .joins(:make)
-        .where('makes.name like ?
-                AND cars.vin like ?
-                AND cars.model like ?',
-               "%#{params[:make]}%",
-               "%#{params[:vin]}%",
-               "%#{params[:model]}%").uniq
-  end
-
-  def Car.with_part_query(params={})
-    Car.select('cars.*, makes.name, parts.name')
-        .joins(:make, :parts)
-        .where('parts.name like ?
-                AND makes.name like ?
-                AND cars.vin like ?
-                AND cars.model like ?',
-               "%#{params[:part]}%",
-               "%#{params[:make]}%",
-               "%#{params[:vin]}%",
-               "%#{params[:model]}%")
-        .order('makes.name').uniq
-  end
-
   def Car.query(params={})
-    if not params[:part] || params[:part] == ''
-      Car.no_part_query(params)
-    else
-      Car.with_part_query(params)
-    end
+    Car.sort(Car.split_on_part(params).distinct, params)
   end
+
+  def Car.index(params={})
+    query = Car.select('cars.*, makes.name').joins(:make, :parts).distinct
+    Car.sort(query, params)
+  end
+
+  private
+    def Car.split_on_part(params={})
+      if not params[:part] || params[:part] == ''
+        Car.no_part_query(params)
+      else
+        Car.with_part_query(params)
+      end
+    end
+
+    def Car.no_part_query(params={})
+      Car.select('cars.*, makes.name')
+          .joins(:make)
+          .where('makes.name like ?
+                  AND cars.vin like ?
+                  AND cars.model like ?',
+                 "%#{params[:make]}%",
+                 "%#{params[:vin]}%",
+                 "%#{params[:model]}%")
+
+    end
+
+    def Car.with_part_query(params={})
+      Car.select('cars.*, makes.name, parts.name')
+          .joins(:make, :parts)
+          .where('parts.name like ?
+                  AND makes.name like ?
+                  AND cars.vin like ?
+                  AND cars.model like ?',
+                 "%#{params[:part]}%",
+                 "%#{params[:make]}%",
+                 "%#{params[:vin]}%",
+                 "%#{params[:model]}%")
+
+          # .order('makes.name').uniq
+    end
+
+    def Car.sort(query, params={})
+      if params[:order] == 'vin' || params[:order] == 'model'
+        query.order(params[:order], :model).page params[:page]
+      else
+        # BE VERY CAREFUL HERE! This method assumes that you have already
+        # joined with makes and that makes.name is available!
+        query.order('makes.name').page params[:page]
+      end
+    end
+
+
+
 
   # def Car.query2(params)
   #   .joins("INNER JOIN makes ON makes.id = #{make.id} AND cars.make_id = #{make.id}")
