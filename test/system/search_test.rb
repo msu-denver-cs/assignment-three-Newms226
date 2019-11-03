@@ -24,17 +24,17 @@ class SearchTest < ApplicationSystemTestCase
 
   test 'should allow searching for parts' do
     visit parts_url
-    fill_in 'search', with: 'wheel'
+    fill_in 'name', with: 'wheel'
     click_on 'Search'
 
     assert_selector 'td', text: 'Wheel'
-    assert_selector 'td', text: 'Sport Tire'
+    assert_selector 'td', text: 'Sport Wheel'
     assert_no_selector 'td', text: 'Tire'
   end
 
   test 'should allow sorting after searching by make name' do
     visit makes_url
-    fill_in 'search', with: 'o'
+    fill_in 'name', with: 'o'
     click_on 'Search'
 
     assert_selector 'td', text: 'Ford'

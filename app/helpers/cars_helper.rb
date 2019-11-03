@@ -1,25 +1,23 @@
 module CarsHelper
 
-  def get_order_url(order_by)
-    # binding.pry
-    if request.path.include? 'cars/search' || request.headers['HTTP_REFERER'].include?('cars/search')
-      # puts 'SEARCH FOUND'
-      search_cars_url pick_apart_search(order_by)
-    else
-      # puts 'NO SEARCH FOUND'
+  def get_car_order_url(order_by)
+    if cars_path? request.path
       cars_url(order: order_by)
+    else
+      search_cars_url pick_apart_car_search(order_by)
     end
   end
 
   private
-    def pick_apart_search(order_by)
+    def pick_apart_car_search(order_by)
       {
           order: order_by,
           make: params[:make] || '',
           model: params[:model] || '',
           vin: params[:vin] || '',
           part: params[:part] || '',
-          page: params[:page]
+          commit: 'Search',
+          utf8: '✓'
       }
     end
 end

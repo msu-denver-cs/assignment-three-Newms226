@@ -18,4 +18,8 @@ module ApplicationHelper
     end
   end
 
+  def cars_path?(test_path)
+    test_path == '/' || test_path == cars_path
+  end
+
 end

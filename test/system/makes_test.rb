@@ -8,6 +8,32 @@ class MakesTest < ApplicationSystemTestCase
     login_as(users(:one), :scope => :user)
   end
 
+  test 'sorting links should always render correctly, regardless of redirect' do
+    visit makes_url
+    click_on 'Name'
+    assert_current_path makes_path, ignore_query: true
+
+    visit parts_url
+    visit makes_path
+    click_on 'Country'
+    assert_current_path makes_path, ignore_query: true
+
+    visit search_makes_path(name: 'Audi')
+    click_on 'Name'
+    assert_current_path search_makes_path, ignore_query: true
+    click_on 'Country'
+    assert_current_path search_makes_path, ignore_query: true
+
+    visit makes_path
+    click_on 'Name'
+    assert_current_path makes_path, ignore_query: true
+
+    visit parts_url
+    visit search_makes_path(name: 'Audi')
+    click_on 'Name'
+    assert_current_path search_makes_path, ignore_query: true
+  end
+
   # Scaffold Tests
 
   test "visiting the index" do

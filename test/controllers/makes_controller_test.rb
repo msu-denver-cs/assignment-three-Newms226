@@ -9,12 +9,12 @@ class MakesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should find a make that exists" do
-    get search_makes_url, params: {search: "Audi"}
+    get search_makes_url, params: {name: "Audi"}
     assert_select 'td', 'Audi'
   end
 
   test "shouldn't find a make that doesnt exist" do
-    get search_makes_url, params: {search: "I dont exist"}
+    get search_makes_url, params: {name: "I dont exist"}
     assert_select 'td', false
   end
 

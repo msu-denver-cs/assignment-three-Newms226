@@ -10,12 +10,6 @@ class CarsController < ApplicationController
   # GET /cars.json
   def index
     @cars = Car.index params
-    # if params[:order] == 'vin' || params[:order] == 'model'
-    #   @cars = Car.all.order(params[:order], :model).page params[:page]
-    # else
-    #   @cars = Car.select('cars.*, makes.name').joins(:make).order('makes.name').page params[:page]
-    # end
-    # # @cars = Car.select('cars.*, ')
   end
 
   # GET /cars/1
@@ -82,25 +76,8 @@ class CarsController < ApplicationController
 
   # GET /cars/search
   def search
-    # binding.pry/
     @cars = Car.query params
-    # @cars = Kaminari.paginate_array(cars).page params[:page]
     render :index
-    # # TODO: Move to model? by seperation of MVC?
-    # if params.key? :make && params[:make] != ""
-    #   print "MAKE NOT EMPTY"
-    #   make_id = Make.where("name like ?", "%#{params[:make]}%" )
-    #   cars = []
-    #   make_id.each do |id|
-    #     cars.append(Cars.where("model_id = ?", id))
-    #   end
-    #   @cars = cars
-    # end
-    #
-    # @cars.append(Car.where("model like ?", "%#{params[:model]}%"))
-    #
-    # render :index
-
   end
 
   private

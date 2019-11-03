@@ -5,7 +5,6 @@ class MakeTest < ActiveSupport::TestCase
     make = Make.create(country: "my country")
     refute make.valid?
 
-
     assert_equal make.errors.messages, {:name=>["can't be blank"]}
   end
 
@@ -33,9 +32,15 @@ class MakeTest < ActiveSupport::TestCase
 
   test 'should sort by country name' do
     actual = Make.index order: 'country'
-    assert_equal [makes(:zeo), makes(:audi), makes(:bmw), makes(:ford), makes(:ram), makes(:toyota)], actual
+    exp = [makes(:zeo), makes(:audi), makes(:bmw), makes(:toyota), makes(:ford), makes(:ram)]
+    assert_equal exp, actual
 
+    actual = Make.query name: 'o', order: 'country'
+    assert_equal [makes(:zeo), makes(:toyota), makes(:ford)], actual
+  end
+
+  test 'should allow searching by make name' do
     actual = Make.query name: 'o'
-    assert_equal [makes(:zeo), makes(:ford), makes(:toyota)], actual
+    assert_equal [makes(:ford), makes(:toyota), makes(:zeo)], actual
   end
 end

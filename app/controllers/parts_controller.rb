@@ -8,7 +8,7 @@ class PartsController < ApplicationController
   # GET /parts
   # GET /parts.json
   def index
-    @parts = Part.all.order(:name).page params[:page]
+    @parts = Part.index params
   end
 
   # GET /parts/1
@@ -66,8 +66,7 @@ class PartsController < ApplicationController
   end
 
   def search
-    parts = Part.where("name like ?", "%#{params[:search]}%")
-    @parts = Kaminari.paginate_array(parts).page params[:page]
+    @parts = Part.query params
     render :index
   end
 

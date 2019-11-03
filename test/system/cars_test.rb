@@ -1,4 +1,5 @@
 require "application_system_test_case"
+require 'pry'
 
 class CarsTest < ApplicationSystemTestCase
   include Warden::Test::Helpers
@@ -7,6 +8,45 @@ class CarsTest < ApplicationSystemTestCase
     @car = cars(:my_car)
     user = users(:one)
     login_as(user, :scope => :user)
+  end
+
+  def extract_hash(path)
+    query = path.split('?')[1]
+    parts = query.split('&')
+    a = parts.map {|sub| a = sub.split('='); a << '' if a.length == 1; a }
+    a.to_h
+  end
+
+  test 'Sorting links should always render correctly, regardless of redirect' do
+    visit cars_url
+    click_on 'Make'
+    assert_current_path cars_path(order: 'make')
+
+    visit parts_url
+    visit cars_url
+    click_on 'Make'
+    assert_current_path cars_path(order: 'make')
+
+    visit search_cars_url
+    fill_in 'make', with: 'Audi'
+    click_on 'Search'
+    assert_current_path search_cars_path, ignore_query: true
+    click_on 'Make'
+    assert_current_path search_cars_path, ignore_query: true
+    click_on 'Model'
+    assert_current_path search_cars_path, ignore_query: true
+
+    visit cars_url
+    click_on 'Make'
+    assert_current_path cars_path(order: 'make')
+
+    visit parts_url
+    visit search_cars_url
+    fill_in 'make', with: 'Audi'
+    click_on 'Search'
+    assert_current_path search_cars_path, ignore_query: true
+    click_on 'Make'
+    assert_current_path search_cars_path, ignore_query: true
   end
 
 

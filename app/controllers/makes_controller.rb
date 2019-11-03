@@ -2,13 +2,12 @@ class MakesController < ApplicationController
   before_action :set_make, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
 
-
   autocomplete :make, :name, full_search: true
 
   # GET /makes
   # GET /makes.json
   def index
-    @makes = Make.all.order(:name, :country).page params[:page]
+    @makes = Make.index params
   end
 
   # GET /makes/1
@@ -66,8 +65,7 @@ class MakesController < ApplicationController
   end
 
   def search
-    makes = Make.where("name like ?", "%#{params[:search]}%")
-    @makes = Kaminari.paginate_array(makes).page params[:page]
+    @makes = Make.query params
     render :index
   end
 

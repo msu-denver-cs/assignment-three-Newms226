@@ -9,12 +9,12 @@ class PartsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should find a part that exists" do
-    get search_parts_url, params: {search: "Wheel"}
+    get search_parts_url, params: {name: "Wheel"}
     assert_select 'td', 'Wheel'
   end
 
   test "shouldn't find a part that doesnt exist" do
-    get search_parts_url, params: {search: "I dont exist"}
+    get search_parts_url, params: {name: "I dont exist"}
     assert_select 'td', false
   end
 

@@ -22,9 +22,6 @@ User.all.each(&:delete)
 
 puts 'Deleted past data'
 
-
-# TODO: Update part
-
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'vehicles.csv'))
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 
