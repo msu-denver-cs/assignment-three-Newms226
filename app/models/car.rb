@@ -16,7 +16,7 @@ class Car < ApplicationRecord
   end
 
   def Car.index(params={})
-    query = Car.select('cars.*, makes.name').joins(:make, :parts).distinct
+    query = Car.select('cars.*, makes.name').joins(:make).distinct
     r = Car.sort(query, params)
     # binding.pry
     r
@@ -26,10 +26,10 @@ class Car < ApplicationRecord
     def Car.split_on_part(params={})
       # binding.pry
       if  params[:part] == '' || (not params[:part])
-        puts '\n\nFOUND NOOOOO PART\n\n'
+        # puts '\n\nFOUND NOOOOO PART\n\n'
         Car.no_part_query(params)
       else
-        puts '\n\nFOUND PART\n\n'
+        # puts '\n\nFOUND PART\n\n'
         Car.with_part_query(params)
       end
     end
@@ -61,13 +61,15 @@ class Car < ApplicationRecord
           # .order('makes.name').uniq
     end
 
+    # BE VERY CAREFUL HERE! This method assumes that you have already
+    # joined with makes and that makes.name is available!
     def Car.sort(query, params={})
-      if params[:order] == 'vin' || params[:order] == 'model'
-        query.order(params[:order], :model).page params[:page]
+      if params[:order] == 'vin'
+        query.order(:vin).page params[:page]
+      elsif params[:order] == 'model'
+        query.order(:model, 'makes.name', :vin).page params[:page]
       else
-        # BE VERY CAREFUL HERE! This method assumes that you have already
-        # joined with makes and that makes.name is available!
-        query.order('makes.name').page params[:page]
+        query.order('makes.name', :model, :vin).page params[:page]
       end
     end
 

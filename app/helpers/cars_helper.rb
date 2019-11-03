@@ -3,10 +3,10 @@ module CarsHelper
   def get_order_url(order_by)
     # binding.pry
     if request.path.include? 'cars/search' || request.headers['HTTP_REFERER'].include?('cars/search')
-      puts 'SEARCH FOUND'
+      # puts 'SEARCH FOUND'
       search_cars_url pick_apart_search(order_by)
     else
-      puts 'NO SEARCH FOUND'
+      # puts 'NO SEARCH FOUND'
       cars_url(order: order_by)
     end
   end
