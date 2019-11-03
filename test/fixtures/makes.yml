@@ -12,10 +12,14 @@ ford:
   name: Ford
   country: USA
 
+ram:
+  name: Ram
+  country: USA
+
 toyota:
   name: Toyota
   country: Japan
 
-ram:
-  name: Ram
-  country: USA
+zeo:
+  name: Zeo
+  country: A

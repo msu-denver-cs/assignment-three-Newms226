@@ -5,3 +5,6 @@ wheel:
 
 tire:
   name: Tire
+
+sport_wheel:
+  name: Sport Wheel

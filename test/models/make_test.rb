@@ -22,4 +22,20 @@ class MakeTest < ActiveSupport::TestCase
     assert make.valid?
     assert make.save
   end
+
+  test 'should be sorted by name by default' do
+    actual = Make.index
+    assert_equal [makes(:audi), makes(:bmw), makes(:ford), makes(:ram), makes(:toyota), makes(:zeo)], actual
+
+    actual = Make.query name: 'o'
+    assert_equal [makes(:ford), makes(:toyota), makes(:zeo)], actual
+  end
+
+  test 'should sort by country name' do
+    actual = Make.index order: 'country'
+    assert_equal [makes(:zeo), makes(:audi), makes(:bmw), makes(:ford), makes(:ram), makes(:toyota)], actual
+
+    actual = Make.query name: 'o'
+    assert_equal [makes(:zeo), makes(:ford), makes(:toyota)], actual
+  end
 end
