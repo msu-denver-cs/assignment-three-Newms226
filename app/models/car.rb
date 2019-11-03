@@ -1,4 +1,4 @@
-
+require 'pry'
 
 class Car < ApplicationRecord
   belongs_to :make
@@ -10,26 +10,33 @@ class Car < ApplicationRecord
   # validates :part_ids, presence: true
 
   def Car.query(params={})
-    Car.sort(Car.split_on_part(params).distinct, params)
+    r = Car.sort(Car.split_on_part(params), params)
+    # binding.pry
+    r
   end
 
   def Car.index(params={})
     query = Car.select('cars.*, makes.name').joins(:make, :parts).distinct
-    Car.sort(query, params)
+    r = Car.sort(query, params)
+    # binding.pry
+    r
   end
 
   private
     def Car.split_on_part(params={})
-      if not params[:part] || params[:part] == ''
+      # binding.pry
+      if  params[:part] == '' || (not params[:part])
+        puts '\n\nFOUND NOOOOO PART\n\n'
         Car.no_part_query(params)
       else
+        puts '\n\nFOUND PART\n\n'
         Car.with_part_query(params)
       end
     end
 
     def Car.no_part_query(params={})
       Car.select('cars.*, makes.name')
-          .joins(:make)
+          .joins(:make).distinct
           .where('makes.name like ?
                   AND cars.vin like ?
                   AND cars.model like ?',
@@ -41,7 +48,7 @@ class Car < ApplicationRecord
 
     def Car.with_part_query(params={})
       Car.select('cars.*, makes.name, parts.name')
-          .joins(:make, :parts)
+          .joins(:make, :parts).distinct
           .where('parts.name like ?
                   AND makes.name like ?
                   AND cars.vin like ?
